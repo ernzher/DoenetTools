@@ -62,6 +62,7 @@ export default function SelectedBank() {
           vertical
           width="menu"
           value={itemTextFieldLabel}
+          data-test="Label Collection"
           onChange={(e) => setItemTextFieldLabel(e.target.value)}
           onKeyDown={(e) => {
             if (e.keyCode === 13) handelLabelModfication();

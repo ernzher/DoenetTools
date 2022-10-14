@@ -30,45 +30,77 @@ describe('Navigation test', function () {
     // returning false here prevents Cypress from
     // failing the test
     return false
-})
+  })
 
-it('Test Add Activity',()=>{
-  cy.get('[data-test="Add Activity Button"]').click();
+  it('Test Add Activity and Change Label',()=>{
+    cy.get('[data-test="Add Activity Button"]').click();
 
-  cy.get('.navigationRow').should('have.length',1); //Need this to wait for the row to appear
-  cy.get('.navigationRow').eq(0).get('.navigationColumn1').contains('Untitled Activity');
+    cy.get('.navigationRow').should('have.length',1); //Need this to wait for the row to appear
+    cy.get('.navigationRow').eq(0).get('.navigationColumn1').contains('Untitled Activity');
+    
+    let label = "Testing Activity Label"
+    cy.task('queryDb', `SELECT doenetId FROM course_content WHERE courseId="${courseId}" AND label="Untitled Activity"`).then((result) => {
+      cy.get('.navigationColumn1').click()
+      cy.get('[data-test="Label Activity"]').clear()
+      cy.get('[data-test="Label Activity"]').type(label, {force: true})
+      cy.get('[data-test="Menu Panel"]').click({force: true})
+
+      cy.task('queryDb', `SELECT label FROM course_content WHERE doenetId="${result[0].doenetId}"`).then((res) => {
+        expect(res[0].label).to.equals(label)
+      }) 
+    })
+  })
+
+  it('Test Add Collection and Change Label',()=>{
+    cy.get('[data-test="Add Collection Button"]').click();
+    cy.get('.navigationRow').should('have.length',1); //Need this to wait for the row to appear
+    cy.get('.navigationRow').eq(0).get('.navigationColumn1').contains('Untitled Collection');
+    
+    let label = "Testing Collection Label"
+    cy.task('queryDb', `SELECT doenetId FROM course_content WHERE courseId="${courseId}" AND label="Untitled Collection"`).then((result) => {
+      cy.get('.navigationColumn1').click()
+      cy.get('[data-test="Label Collection"]').clear()
+      cy.get('[data-test="Label Collection"]').type(label, {force: true})
+      cy.get('[data-test="Menu Panel"]').click({force: true})
+
+      cy.task('queryDb', `SELECT label FROM course_content WHERE doenetId="${result[0].doenetId}"`).then((res) => {
+        expect(res[0].label).to.equals(label)
+      }) 
+    })
+  })
+
+  it('Test Add Section and Change Label',()=>{
+    cy.get('[data-test="Add Section Button"]').click();
+
+    cy.get('.navigationRow').should('have.length',1); //Need this to wait for the row to appear
+    cy.get('.navigationRow').eq(0).get('.navigationColumn1').contains('Untitled Section');
+
+    let label = "Testing Section Label"
+    cy.task('queryDb', `SELECT doenetId FROM course_content WHERE courseId="${courseId}" AND label="Untitled Section"`).then((result) => {
+      cy.get('.navigationColumn1').click()
+      cy.get('[data-test="Label Section"]').clear()
+      cy.get('[data-test="Label Section"]').type(label, {force: true})
+      cy.get('[data-test="Menu Panel"]').click({force: true})
+
+      cy.task('queryDb', `SELECT label FROM course_content WHERE doenetId="${result[0].doenetId}"`).then((res) => {
+        expect(res[0].label).to.equals(label)
+      }) 
+    })
+  })
+
+  it('Test Add a Activity, Collection and Section',()=>{
+    cy.get('[data-test="Add Activity Button"]').click();
+
+    cy.get('[data-test="Add Collection Button"]').click();
+
+    cy.get('[data-test="Add Section Button"]').click();
+
+    cy.get('.navigationRow').should('have.length',3); //Need this to wait for the 3rd one to appear
+    cy.get('.navigationRow').eq(0).get('.navigationColumn1').contains('Untitled Activity');
+    cy.get('.navigationRow').eq(1).get('.navigationColumn1').contains('Untitled Collection');
+    cy.get('.navigationRow').eq(2).get('.navigationColumn1').contains('Untitled Section');
 
 
-})
-
-it('Test Add Collection',()=>{
-  cy.get('[data-test="Add Collection Button"]').click();
-  cy.get('.navigationRow').should('have.length',1); //Need this to wait for the row to appear
-  cy.get('.navigationRow').eq(0).get('.navigationColumn1').contains('Untitled Collection');
-  
-})
-
-it('Test Add Section',()=>{
-  cy.get('[data-test="Add Section Button"]').click();
-
-  cy.get('.navigationRow').should('have.length',1); //Need this to wait for the row to appear
-  cy.get('.navigationRow').eq(0).get('.navigationColumn1').contains('Untitled Section');
-})
-
-it('Test Add a Activity, Collection and Section',()=>{
-  cy.get('[data-test="Add Activity Button"]').click();
-
-  cy.get('[data-test="Add Collection Button"]').click();
-
-  cy.get('[data-test="Add Section Button"]').click();
-
-  cy.get('.navigationRow').should('have.length',3); //Need this to wait for the 3rd one to appear
-  cy.get('.navigationRow').eq(0).get('.navigationColumn1').contains('Untitled Activity');
-  cy.get('.navigationRow').eq(1).get('.navigationColumn1').contains('Untitled Collection');
-  cy.get('.navigationRow').eq(2).get('.navigationColumn1').contains('Untitled Section');
-
-
-})
-
+  })
   
 })
