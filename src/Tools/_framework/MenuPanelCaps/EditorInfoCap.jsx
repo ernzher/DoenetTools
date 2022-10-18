@@ -31,7 +31,7 @@ export default function EditorInfoCap(){
 
  let activityPageJSX = <>
  <div style={{ marginBottom: "1px", marginTop:"5px" }}>Activity</div> 
- <div style={{ marginBottom: "5px",padding:'1px 5px' }}>{activityInfo.label}</div> 
+ <div style={{ marginBottom: "5px",padding:'1px 5px' }} data-test="Activity Label">{activityInfo.label}</div> 
  <div style={{ marginBottom: "1px", marginTop:"5px" }}>Page</div> 
  <div style={{ marginBottom: "5px",padding:'1px 5px' }}>{pageInfo.label}</div> 
  </>
@@ -39,14 +39,14 @@ export default function EditorInfoCap(){
 if (activityInfo.isSinglePage ){
   activityPageJSX = <>
   <div style={{ marginBottom: "1px", marginTop:"5px" }}>Activity</div> 
-  <div style={{ marginBottom: "5px",padding:'1px 5px' }}>{activityInfo.label}</div> 
+  <div style={{ marginBottom: "5px",padding:'1px 5px' }} data-test="Activity Label">{activityInfo.label}</div> 
   </>
 }
 
 if (activityInfo.type == 'bank'){
   activityPageJSX = <>
   <div style={{ marginBottom: "1px", marginTop:"5px" }}>Collection</div> 
-  <div style={{ marginBottom: "5px",padding:'1px 5px' }}>{activityInfo.label}</div> 
+  <div style={{ marginBottom: "5px",padding:'1px 5px' }} data-test="Activity Label">{activityInfo.label}</div> 
   <div style={{ marginBottom: "1px", marginTop:"5px" }}>Page</div> 
  <div style={{ marginBottom: "5px",padding:'1px 5px' }}>{pageInfo.label}</div> 
   </>
@@ -59,7 +59,7 @@ if (activityInfo.type == 'bank'){
     </div>
     <b>Editor</b>
       <div style={{ marginBottom: "1px", marginTop:"5px" }}>Course</div> 
-      <div style={{ marginBottom: "5px",padding:'1px 5px' }}>{course_label}</div> 
+      <div style={{ marginBottom: "5px",padding:'1px 5px' }} data-test="Course Label">{course_label}</div> 
       {activityPageJSX}
     {/* <ClipboardLinkButtons doenetId={doenetId}/> */}
     {/* <div>Last saved (comming soon)</div> */}
