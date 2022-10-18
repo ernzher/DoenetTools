@@ -1,28 +1,28 @@
 
-describe('Activity Settings Test', function () {
-    const userId = "cyuserId";
-    const studentUserId = "cyStudentUserId";
-    const courseId = "courseid1";
-    const doenetId = "activity1id";
-    const pageDoenetId = "_page1id";
+describe('Navigation Activity Settings Test', function () {
+  const userId = "cyuserId";
+  const studentUserId = "cyStudentUserId";
+  const courseId = "courseid1";
+  const doenetId = "activity1id";
+  const pageDoenetId = "_page1id";
 
-    
-    before(() => {
-      cy.signin({ userId });
-      cy.clearAllOfAUsersCoursesAndItems({ userId });
-      cy.clearAllOfAUsersCoursesAndItems({ userId: studentUserId });
-      cy.createCourse({ userId, courseId, studentUserId });
-    })
-    
-    beforeEach(() => {
-      cy.signin({ userId });
-      cy.clearIndexedDB();
-      cy.clearAllOfAUsersActivities({ userId })
-      cy.clearAllOfAUsersActivities({ userId: studentUserId })
-      cy.createActivity({courseId,doenetId,parentDoenetId:courseId,pageDoenetId});
-      cy.visit(`course?tool=navigation&courseId=${courseId}`)
-      cy.get('.navigationRow').click()
-    })
+  before(() => {
+    cy.signin({ userId });
+    cy.clearAllOfAUsersCoursesAndItems({ userId });
+    cy.clearAllOfAUsersCoursesAndItems({ userId: studentUserId });
+    cy.createCourse({ userId, courseId, studentUserId });
+  })
+  
+  beforeEach(() => {
+    cy.signin({ userId });
+    cy.clearIndexedDB();
+    cy.clearAllOfAUsersActivities({ userId })
+    cy.clearAllOfAUsersActivities({ userId: studentUserId })
+    cy.createActivity({courseId,doenetId,parentDoenetId:courseId,pageDoenetId});
+    cy.visit(`course?tool=navigation&courseId=${courseId}`)
+    cy.get('.navigationRow').click()
+
+  })
   
   // how to test time?
   it('Set Assigned Date',()=>{

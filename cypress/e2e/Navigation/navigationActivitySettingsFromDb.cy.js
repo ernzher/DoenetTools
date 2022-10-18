@@ -1,5 +1,5 @@
 
-describe('Activity Settings From Database Test', function () {
+describe('Navigation Activity Settings From Database Test', function () {
   const userId = "cyuserId";
   const studentUserId = "cyStudentUserId";
   const courseId = "courseid1";
@@ -45,7 +45,7 @@ describe('Activity Settings From Database Test', function () {
     cy.visit(`course?tool=navigation&courseId=${courseId}`)
     cy.get('.navigationRow').click()
   })
-  
+
   it('Set Assigned Date',()=>{
     cy.get('[data-test="Assigned Date"]').should('contain.value', "12/31/2023 6:00 PM")
   })
